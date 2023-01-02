@@ -35,13 +35,45 @@ const mario = {
   ativa: false,
 };
 
-function somaTotal(dados) {
-  const valoresLimpos = dados.map((v) => Number(v.preco.replace("R$ ", "")));
-  return valoresLimpos.reduce((a, c) => a + c);
-}
+
+// Solução David
+
+// function somaTotal(dados) {
+//   const valoresLimpos = dados.map((v) => Number(v.preco.replace("R$ ", "")));
+//   return valoresLimpos.reduce((a, c) => a + c);
+// }
+
+// const App = () => {
+//   const [dados, setDados] = React.useState(luana)
+
+//   function changeName() {
+//     if(dados.cliente !== 'Mario') {
+//       setDados(mario)
+//     } else {
+//       setDados(luana)
+//     }
+//   }
+
+//   return (  
+//   <>
+//     <p>None: {dados.cliente}</p>
+//     <p>Idade: {dados.idade}</p>
+//     <p>Situação: <span style={{color: dados.ativa ? 'green' : 'red'}}>{dados.ativa ? "Ativo" : "Inativo" }</span></p>
+//     <p>Total gastos: R$ {somaTotal(dados.compras)}</p>
+//     {
+//       somaTotal(dados.compras) >= 10000 ? <p>Você está gastando muito.</p> : null
+      
+//     }
+//     <button onClick={changeName}>Mudar</button>
+//   </>
+//   );
+// };
 
 const App = () => {
+  // const dados = mario;
   const [dados, setDados] = React.useState(luana)
+
+  const total = dados.compras.map((item) => Number(item.preco.replace('R$ ', ''))).reduce((a, c) => a + c);
 
   function changeName() {
     if(dados.cliente !== 'Mario') {
@@ -51,16 +83,17 @@ const App = () => {
     }
   }
 
-  return (  
-  <>
-    <p>None: {dados.cliente}</p>
-    <p>Idade: {dados.idade}</p>
-    <p>Situação: <span style={dados.ativa ? {color: "green"} :{color: "red"} }>{dados.ativa ? "Ativo" : "Inativo" }</span></p>
-    <p>Total gastos: R$ {somaTotal(dados.compras)}</p>
-    <button onClick={changeName}>Mudar</button>
-  </>
-  );
-};
+  return (
+    <>
+      <p>None: {dados.cliente}</p>
+      <p>Idade: {dados.idade}</p>
+      <p>Situação: <span style={{color: dados.ativa ? 'green' : 'red'}}>{dados.ativa ? "Ativa" : "Inativa"} </span> </p>
+      <p>Total: R$ {total}</p>
+      {total >= 10000 && <p>Você está gastando muito.</p>}
+      <button onClick={changeName}>Mudar</button>
+    </>
+  )
+}
 
 
 export default App;
