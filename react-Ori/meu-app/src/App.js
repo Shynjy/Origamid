@@ -32,11 +32,20 @@ const Titulo = ({ cor, children }) => {
 // // Componentes
 
 const App = () => {
+  const [ativo, setAtivo] = React.useState(true);
+
+  function handleClick() {
+    setAtivo(!ativo);
+  }
+
   return (
     <div>
       <Header />
       <Titulo cor="red">Título UM</Titulo>
       App
+      <div style={{ margin: '1rem 0' }}>
+        <button onClick={handleClick}>{ativo ? 'Ativo' : 'Inativo'}</button>
+      </div>
       <Footer />
     </div>
   );
