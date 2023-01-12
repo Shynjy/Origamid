@@ -4,6 +4,11 @@ import React from 'react';
 // import Header from './Header';
 // import Footer from './Footer';
 
+import Imput from './Comps/Input';
+import Radio from './Comps/Radio';
+import Select from './Comps/Select';
+import Checkbox from './Comps/Checkbox';
+
 // Hooks Criados
 
 // JSX 1
@@ -121,34 +126,72 @@ import React from 'react';
 
 // Formulários com um objeto
 
+// const App = () => {
+//   const [form, setForm] = React.useState({
+//     nome: '',
+//     email: '',
+//   });
+
+//   function handleSubmit(event) {
+//     event.preventDefault();
+//   }
+
+//   function handleChange({ target }) {
+//     const { id, value } = target;
+//     setForm({ ...form, [id]: value });
+//   }
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <label htmlFor="nome">Nome</label>
+//       <input id="nome" type="text" value={form.nome} onChange={handleChange} />
+//       <label htmlFor="email">Email</label>
+//       <input
+//         id="email"
+//         type="email"
+//         value={form.email}
+//         onChange={handleChange}
+//       />
+//       <button>Enviar</button>
+//     </form>
+//   );
+// };
+
+// Componentes criandos
+
 const App = () => {
-  const [form, setForm] = React.useState({
-    nome: '',
-    email: '',
-  });
-
-  function handleSubmit(event) {
-    event.preventDefault();
-  }
-
-  function handleChange({ target }) {
-    const { id, value } = target;
-    setForm({ ...form, [id]: value });
-  }
+  const [nome, setNome] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [produto, setProduto] = React.useState('');
+  const [cor, setCor] = React.useState('');
+  const [frutas, setFrutas] = React.useState([]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="nome">Nome</label>
-      <input id="nome" type="text" value={form.nome} onChange={handleChange} />
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        value={form.email}
-        onChange={handleChange}
+    <div>
+      <Checkbox
+        options={['Banana', 'Maça']}
+        value={frutas}
+        setValue={setFrutas}
       />
-      <button>Enviar</button>
-    </form>
+      <br />
+      <Radio options={['Azul', 'Vermelho']} value={cor} setValue={setCor} />
+      <br />
+      <Select
+        options={['Smartphone', 'Tablet', 'Notebook']}
+        value={produto}
+        setValue={setProduto}
+      />
+      <br />
+      <br />
+      <Imput id="nome" label="Nome" value={nome} setValue={setNome} />
+      <Imput
+        type="email"
+        id="email"
+        label="Email"
+        value={email}
+        setValue={setEmail}
+      />
+    </div>
   );
 };
 
