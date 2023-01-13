@@ -4,10 +4,11 @@ import React from 'react';
 // import Header from './Header';
 // import Footer from './Footer';
 
-import Imput from './Comps/Input';
-import Radio from './Comps/Radio';
-import Select from './Comps/Select';
-import Checkbox from './Comps/Checkbox';
+// import Radio from './Comps/Radio';
+// import Select from './Comps/Select';
+// import Checkbox from './Comps/Checkbox';
+import Input from './Comps/Input';
+import useForm from './hooks/useForm';
 
 // Hooks Criados
 
@@ -159,39 +160,70 @@ import Checkbox from './Comps/Checkbox';
 
 // Componentes criandos
 
+// const App = () => {
+//   const [nome, setNome] = React.useState('');
+//   const [email, setEmail] = React.useState('');
+//   const [produto, setProduto] = React.useState('');
+//   const [cor, setCor] = React.useState('');
+//   const [frutas, setFrutas] = React.useState([]);
+
+//   return (
+//     <div>
+//       <Checkbox
+//         options={['Banana', 'Maça']}
+//         value={frutas}
+//         setValue={setFrutas}
+//       />
+//       <br />
+//       <Radio options={['Azul', 'Vermelho']} value={cor} setValue={setCor} />
+//       <br />
+//       <Select
+//         options={['Smartphone', 'Tablet', 'Notebook']}
+//         value={produto}
+//         setValue={setProduto}
+//       />
+//       <br />
+//       <br />
+//       <Input id="nome" label="Nome" value={nome} setValue={setNome} />
+//       <Input
+//         type="email"
+//         id="email"
+//         label="Email"
+//         value={email}
+//         setValue={setEmail}
+//       />
+
+//     </div>
+//   );
+// };
+
+// Validação
+
 const App = () => {
-  const [nome, setNome] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [produto, setProduto] = React.useState('');
-  const [cor, setCor] = React.useState('');
-  const [frutas, setFrutas] = React.useState([]);
+  const cep = useForm('cep');
+  const email = useForm('email');
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (cep.validate()) {
+      console.log('Enviar');
+    } else {
+      console.log('Não enviar');
+    }
+  }
 
   return (
-    <div>
-      <Checkbox
-        options={['Banana', 'Maça']}
-        value={frutas}
-        setValue={setFrutas}
+    <form onSubmit={handleSubmit}>
+      <Input
+        label="CEP"
+        id="cep"
+        type="text"
+        placeholder="00000-000"
+        {...cep}
       />
-      <br />
-      <Radio options={['Azul', 'Vermelho']} value={cor} setValue={setCor} />
-      <br />
-      <Select
-        options={['Smartphone', 'Tablet', 'Notebook']}
-        value={produto}
-        setValue={setProduto}
-      />
-      <br />
-      <br />
-      <Imput id="nome" label="Nome" value={nome} setValue={setNome} />
-      <Imput
-        type="email"
-        id="email"
-        label="Email"
-        value={email}
-        setValue={setEmail}
-      />
-    </div>
+      <Input label="Email" id="email" type="email" {...email} />
+      <button>Enviar</button>
+    </form>
   );
 };
 
