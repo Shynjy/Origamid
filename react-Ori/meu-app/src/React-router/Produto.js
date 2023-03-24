@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
+import Head from './Head';
 
 // Primeira forma de fazer Rotas aninhadas
 // import ProdutoAvaliacao from './ProdutoAvaliacao';
@@ -11,6 +12,7 @@ const Produto = () => {
 
   return (
     <div>
+      <Head title="Produto" />
       <Link to="/">Voltar</Link>
       <h1>Produto: {params.id}</h1>
       <nav>
